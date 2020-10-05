@@ -1,5 +1,5 @@
 <h2>Posts:</h2>
 
 <ul>
-    <app-post [post]="post" *ngFor="let post of posts" ></app-post>
+    <li (click)="clickPost(post)" app-post="" [post]="post" *ngFor="let post of posts" ></li>
 </ul>

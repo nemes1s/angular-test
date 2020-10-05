@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { PostsService } from './posts.service';
 
 @Component({
@@ -7,16 +8,27 @@ import { PostsService } from './posts.service';
   styleUrls: ['./posts.component.sass'],
   providers: [PostsService]
 })
-export class PostsComponent implements OnInit {
+export class PostsComponent implements OnInit, OnDestroy {
 
-  constructor(private postsService: PostsService) { }
+  constructor(private postsService: PostsService) {
 
+  }
+  
+  private subscription: Subscription;
   posts: any[]
 
   ngOnInit(): void {
-    this.postsService.getPosts().subscribe((data: any[]) => {
+    this.subscription = this.postsService.getPosts().subscribe((data: any[]) => {
       this.posts = data;
-    })
+    }, err =>{console.log(err)})
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe()
+  }
+
+  clickPost(post) {
+    this.postsService.flipPost(post)
   }
 
 }
