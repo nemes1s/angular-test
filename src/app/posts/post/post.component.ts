@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'li[app-post]',
+  selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.sass']
 })
